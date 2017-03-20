@@ -1,0 +1,38 @@
+<h1>Leaderboard</h1>
+<form action="/request" method="GET">
+  <label for='after_date'>After Date</label>
+  <input type="datetime-local" name="after_date" placeholder="YYYY-MM-DD" id="after_date" required="true">
+  <label for='before_date'>Before Date</label>
+  <input type="datetime-local" name="before_date" placeholder="YYYY-MM-DD" id="before_date" required="true">
+  <select name="count" required="true">
+    <option value="" disabled selected>Count</option>
+    <% 100.times do |i| %>
+      <option value="<%= (i + 1) %>"><%= i + 1 %></option>
+    <% end %>
+  </select>
+  <select name="event" required="true">
+    <option value="" disabled selected>Event Type</option>
+    <% eventtypes.each do |event| %>
+      <option value="<%= event%>"><%= event %></option>
+    <% end %>
+  </select>
+  <input type=submit>
+</form>
+<p>
+  <% if flash[:error] %>
+    <div class="error"><%= flash[:error] %></div>
+  <% end %>
+</p>
+<br>
+<table>
+  <tr>
+    <th>Repo</th>
+    <th>Num of Specified Events</th>
+  </tr>
+  <% @repositories.each do |repo| %>
+    <tr>
+      <td><%= repo[0] %></td>
+      <td><%= repo[1] %></td>
+    </tr>
+  <% end %>
+</table>
