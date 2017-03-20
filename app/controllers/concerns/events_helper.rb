@@ -21,8 +21,10 @@ module EventsHelper
         #catches different data formatting from gh_archive_api
         if event['repo']
           repo_name = event['repo']['name']
-        else
+        elsif event['repository']
           repo_name = event['repository']['owner'] + "/" + event['repository']['name']
+        else
+          break
         end
         repos[repo_name] += 1
       end

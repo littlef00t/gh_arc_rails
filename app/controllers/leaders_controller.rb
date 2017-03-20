@@ -1,3 +1,7 @@
+require 'open-uri'
+require 'zlib'
+require 'yajl'
+
 class LeadersController < ApplicationController
   include EventsHelper
 
