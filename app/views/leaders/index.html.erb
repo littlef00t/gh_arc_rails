@@ -27,12 +27,14 @@
 <table>
   <tr>
     <th>Repo</th>
-    <th>Num of Specified Events</th>
+    <th>Number of Specified Events</th>
   </tr>
-  <% @repositories.each do |repo| %>
-    <tr>
-      <td><%= repo[0] %></td>
-      <td><%= repo[1] %></td>
-    </tr>
+  <% if @repositories %>
+    <% @repositories.each do |repo| %>
+      <tr>
+        <td><%= repo[0] %></td>
+        <td><%= repo[1] %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>

@@ -6,14 +6,12 @@ class LeadersController < ApplicationController
   include EventsHelper
 
   def index
-    @repositories = []
   end
 
   def create
     after_date = params[:after_date]
     before_date = params[:before_date]
     count = params[:count].to_i
-    @repositories = Hash.new { |h, k| h[k] = 0 }
     if after_date > before_date
       flash.now[:error] = "Please make sure 'After Date' is before the 'Before Date'"
     else

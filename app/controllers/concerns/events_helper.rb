@@ -33,10 +33,10 @@ module EventsHelper
       start_time += 60.minutes
     end
 
-    reverse_and_sort(repos)[0...count]
+    reverse_sort(repos)[0...count]
   end
 
-  def reverse_and_sort(repos)
+  def reverse_sort(repos)
     repos.sort_by { |k, v| v }.reverse
   end
 
