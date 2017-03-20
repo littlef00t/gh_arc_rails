@@ -1,3 +1,7 @@
+require 'open-uri'
+require 'zlib'
+require 'yajl'
+
 module EventsHelper
 
   def get_url(time)
@@ -14,6 +18,7 @@ module EventsHelper
     js = Zlib::GzipReader.new(gz).read
     Yajl::Parser.parse(js) do |event|
       if event['type'] == params[:event]
+        #catches different data formatting from gh_archive_api
         if event['repo']
           repo_name = event['repo']['name']
         else
@@ -28,7 +33,7 @@ module EventsHelper
     repos = Hash.new { |h, k| h[k] = 0 }
 
     if start_time == end_time
-      repo_count = hit_gh_api(start_time, repos)
+      hit_gh_api(start_time, repos)
     end
 
     until start_time == end_time
