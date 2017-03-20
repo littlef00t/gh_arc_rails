@@ -10,12 +10,15 @@ module EventsHelper
 
   def hit_gh_api(time, repos)
     gh_archive_url = get_url(time)
-    puts gh_archive_url
     gz = open(gh_archive_url)
     js = Zlib::GzipReader.new(gz).read
     Yajl::Parser.parse(js) do |event|
       if event['type'] == params[:event]
-        repo_name = event['repo']['name']
+        if event['repo']
+          repo_name = event['repo']['name']
+        else
+          repo_name = event['repository']['owner'] + "/" + event['repository']['name']
+        end
         repos[repo_name] += 1
       end
     end
